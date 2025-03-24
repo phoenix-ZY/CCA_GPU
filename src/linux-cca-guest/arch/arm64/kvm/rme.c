@@ -467,7 +467,7 @@ static int realm_create_protected_data_page(struct realm *realm,
 	dst_phys = page_to_phys(dst_page); // target
 	tmp_phys = page_to_phys(tmp_page); // source
 
-	if (rmi_granule_delegate(dst_phys))
+	if (rmi_granule_delegate_dev(dst_phys))
 		return -ENXIO;
 
 	if(dev){

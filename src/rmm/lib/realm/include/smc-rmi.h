@@ -102,6 +102,8 @@
  */
 #define SMC_RMM_GRANULE_DELEGATE		SMC64_RMI_FID(U(0x1))
 
+#define SMC_RMM_GRANULE_DELEGATE_DEV		SMC64_RMI_FID(U(0x1a))
+
 /*
  * arg0 == target granule address
  */

@@ -30,6 +30,13 @@ void asc_mark_secure_dev(unsigned long addr, unsigned long delegate_flag, unsign
 	assert(ret == 0);
 }
 
+void asc_mark_secure_dev_1(unsigned long addr)
+{
+	__unused int ret;
+	ret = monitor_call(SMC_ASC_MARK_SECURE_DEV_1, addr, 0, 0, 0);
+	assert(ret == 0);
+}
+
 void asc_attach_dev(unsigned long addr)
 {
 	__unused int ret;

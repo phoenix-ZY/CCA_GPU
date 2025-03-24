@@ -1571,6 +1571,11 @@ uint64_t rmmd_rmm_el3_handler(uint32_t smc_fid, uint64_t x1, uint64_t x2,
 		ret = __gpt_delegate_dev_pas(x1, PAGE_SIZE_4KB, SMC_FROM_REALM, x2,x3);
 		CCA_TFA_SMC_DEL_DEV_PAS_STOP();
 		SMC_RET1(handle, gpt_to_gts_error(ret, smc_fid, x1));
+	case RMM_GTSI_DELEGATE_DEV_1:
+		CCA_TFA_SMC_DEL_DEV_PAS_START();
+		ret = gpt_delegate_dev_pas(x1, PAGE_SIZE_4KB, SMC_FROM_REALM,1);
+		CCA_TFA_SMC_DEL_DEV_PAS_STOP();
+		SMC_RET1(handle, gpt_to_gts_error(ret, smc_fid, x1));
 	// ! REALM
 	case RMM_REQUEST_DEVICE_OWNERSHIP:
 		CCA_TFA_RMM_REQUEST_DEVICE_OWNERSHIP_START();

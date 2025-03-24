@@ -42,6 +42,12 @@ unsigned long smc_granule_delegate_dev(unsigned long addr, unsigned long delegat
 	return RMI_SUCCESS;
 }
 
+unsigned long smc_granule_delegate_dev_1(unsigned long addr)
+{
+	asc_mark_secure_dev_1(addr);
+	return RMI_SUCCESS;
+}
+
 unsigned long smc_attach_dev(unsigned long addr)
 {
 	asc_attach_dev(addr);

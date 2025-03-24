@@ -129,6 +129,7 @@ static const struct smc_handler smc_handlers[] = {
 	HANDLER_0(SMC_RMM_VERSION,		 smc_version,			true,  true),
 	HANDLER_1_O(SMC_RMM_FEATURES,		 smc_read_feature_register,	true,  true, 1U),
 	HANDLER_1(SMC_RMM_GRANULE_DELEGATE,	 smc_granule_delegate,		false, true),
+	HANDLER_1(SMC_RMM_GRANULE_DELEGATE_DEV,	 smc_granule_delegate_dev_1,		false, true),
 	HANDLER_1(SMC_RMM_GRANULE_UNDELEGATE,	 smc_granule_undelegate,	false, true),
 	HANDLER_2(SMC_RMM_REALM_CREATE,		 smc_realm_create,		true,  true),
 	HANDLER_1(SMC_RMM_REALM_DESTROY,	 smc_realm_destroy,		true,  true),
