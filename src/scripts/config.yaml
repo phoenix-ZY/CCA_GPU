@@ -1,0 +1,9 @@
+tasks:
+  - task_id: 1
+    gpu_task_file: task1.ko
+    input_data_file: input1.txt
+    realm_memory: 512M
+  - task_id: 2
+    gpu_task_file: task2.ko
+    input_data_file: input2.txt
+    realm_memory: 1G
