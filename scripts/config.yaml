@@ -1,0 +1,14 @@
+memory:
+  realm_memory: 1G
+tasks:
+  - task_id: 1
+    gpu_task_file: task1
+    input_data_file: input1.txt
+    output_data_file: output1.txt
+    model_weight: weight1.txt
+  - task_id: 2
+    gpu_task_file: task2
+    input_data_file: input2.txt
+    output_data_file: output2.txt
+    model_weight: weight2.txt
+    

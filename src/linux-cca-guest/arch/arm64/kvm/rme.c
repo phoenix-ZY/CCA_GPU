@@ -859,21 +859,22 @@ static int populate_par_region(struct kvm *kvm,
 		     offset += PAGE_SIZE, page++) {
 			phys_addr_t page_ipa = ipa + offset;
 			if(dev){
-				if(iter < 6){
-					ipa_dev[iter] = ipa;
-					pa_dev[iter] = page_to_phys(page);
-					printk("i %d ipa[i] %llx pa[i] %llx pfn %llx;  ", iter, ipa_dev[iter], pa_dev[iter], pfn);
-					iter ++;
-				}else{
-					dev_page = true;
-					phys_addr_t tmp_phys = page_to_phys(tmp_page);
-					phys_addr_t page_phys = page_to_phys(page);
-					unsigned long tmp_virt = (unsigned long)phys_to_virt(tmp_phys);
-					unsigned long page_virt = (unsigned long) phys_to_virt(page_phys);
-					printk("i %d tmp_phys %llx tmp_virt %llx page_phys %llx page_virt %llx pfn %llx;  ", iter, tmp_phys, tmp_virt, page_phys, page_virt, pfn);
-					make_dev_data(page_phys, page_virt, tmp_virt, ipa_dev, pa_dev); //this should populate the pages with dev_data 
-					iter++;
-				}
+				dev_page = true;
+				// if(iter < 6){
+				// 	ipa_dev[iter] = ipa;
+				// 	pa_dev[iter] = page_to_phys(page);
+				// 	printk("i %d ipa[i] %llx pa[i] %llx pfn %llx;  ", iter, ipa_dev[iter], pa_dev[iter], pfn);
+				// 	iter ++;
+				// }else{
+				// 	dev_page = true;
+				// 	phys_addr_t tmp_phys = page_to_phys(tmp_page);
+				// 	phys_addr_t page_phys = page_to_phys(page);
+				// 	unsigned long tmp_virt = (unsigned long)phys_to_virt(tmp_phys);
+				// 	unsigned long page_virt = (unsigned long) phys_to_virt(page_phys);
+				// 	printk("i %d tmp_phys %llx tmp_virt %llx page_phys %llx page_virt %llx pfn %llx;  ", iter, tmp_phys, tmp_virt, page_phys, page_virt, pfn);
+				// 	make_dev_data(page_phys, page_virt, tmp_virt, ipa_dev, pa_dev); //this should populate the pages with dev_data 
+				// 	iter++;
+				// }
 			//Pertie: this is the last granule. Make it a data granule. 
 			//src page is "tmp_page"
 			//target page is "page" : write data to this. 

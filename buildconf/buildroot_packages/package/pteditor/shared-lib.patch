@@ -1,0 +1,16 @@
+diff --git a/Makefile b/Makefile
+index 1a1c0c3..538c95e 100644
+--- a/Makefile
++++ b/Makefile
+@@ -25,3 +25,11 @@ clean:
+ 	cd demos && make clean
+ 	cd test && make clean
+ 	rm -f example *.o
++
++
++libptedit.a: ptedit.o
++	$(AR) rcs $@ $^
++
++libptedit.so: ptedit.o
++	$(CC) $(CFLAGS) -c -fPIC ptedit.c -o libptedit.o
++	$(CC) $(CFLAGS) -shared libptedit.o -o libptedit.so

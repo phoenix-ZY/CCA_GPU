@@ -1,0 +1,9 @@
+.DS_Store
+.idea
+*.log
+tmp/
+
+
+build/
+aarch64-none-elf
+aarch64-none-linux-gnu

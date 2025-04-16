@@ -1,0 +1,6 @@
+[submodule "src/kvmtool/dtc"]
+	path = src/kvmtool/dtc
+	url = https://github.com/sectrs-acai/dtc.git
+[submodule "src/kvmtool/kvmtool"]
+	path = src/kvmtool/kvmtool
+	url = git@github.com:phoenix-ZY/CCA_GPU_kvmtool.git
