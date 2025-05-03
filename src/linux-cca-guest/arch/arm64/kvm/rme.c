@@ -15,6 +15,8 @@
 #include <asm/kvm_pgtable.h>
 #define LIMBS(dst)	(dst >> (8*7)) & 0xFF, (dst >> (8*6)) & 0xFF, (dst >> (8*5)) & 0xFF, (dst >> (8*4)) & 0xFF, \
 					(dst >> (8*3)) & 0xFF, (dst >> (8*2)) & 0xFF, (dst >> (8*1)) & 0xFF, (dst >> (8*0)) & 0xFF
+#define STR(s) #s
+#define CCA_MARKER(marker) __asm__ volatile("MOV XZR, " STR(marker))
 struct kvm_pgtable_walk_data {
 	struct kvm_pgtable		*pgt;
 	struct kvm_pgtable_walker	*walker;
@@ -466,17 +468,14 @@ static int realm_create_protected_data_page(struct realm *realm,
 
 	dst_phys = page_to_phys(dst_page); // target
 	tmp_phys = page_to_phys(tmp_page); // source
-
 	if (rmi_granule_delegate_dev(dst_phys))
 		return -ENXIO;
-
-	if(dev){
-		//TODO[Supraja] this should be different for RMI_NO_MEASURE_CONTENT
-		flags = 3UL;
-	}
+	// if(dev){
+	// 	//TODO[Supraja] this should be different for RMI_NO_MEASURE_CONTENT
+	// 	flags = 3UL;
+	// }
 	ret = rmi_data_create(dst_phys, virt_to_phys(realm->rd), ipa, tmp_phys,
 			      flags);
-
 	if (RMI_RETURN_STATUS(ret) == RMI_ERROR_RTT) {
 		/* Create missing RTTs and retry */
 		int level = RMI_RETURN_INDEX(ret);
@@ -489,7 +488,6 @@ static int realm_create_protected_data_page(struct realm *realm,
 		ret = rmi_data_create(dst_phys, virt_to_phys(realm->rd), ipa,
 				      tmp_phys, flags);
 	}
-
 	if (ret)
 		goto err;
 
@@ -757,7 +755,6 @@ static int populate_par_region(struct kvm *kvm,
 		ret = -EFAULT;
 		goto out;
 	}
-
 	/* We require the region to be contained within a single memslot */
 	if (memslot->base_gfn + memslot->npages < end_gfn) {
 		ret = -EINVAL;
@@ -773,7 +770,6 @@ static int populate_par_region(struct kvm *kvm,
 	mmap_read_lock(current->mm);
 
 	ipa = ipa_base;
-
 
 	while (ipa < ipa_end) {
 		struct vm_area_struct *vma;
@@ -888,11 +884,12 @@ static int populate_par_region(struct kvm *kvm,
 			//FIXME: the bar address region is not addressable as granules in the RMM implementation. The checks cannot be performed. For now just use this. 
 			
  			}
-
+			if(offset == 0)
+			CCA_MARKER(0x100);
 				ret = realm_create_protected_data_page(realm, page_ipa,
 							       page, tmp_page, dev_page);
-			
-			
+			if(offset == 0)
+			CCA_MARKER(0x101);
 		}
 		if (ret)
 			goto err_release_pfn;

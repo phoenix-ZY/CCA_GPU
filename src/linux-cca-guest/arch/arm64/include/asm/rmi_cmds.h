@@ -72,7 +72,6 @@ static inline int rmi_granule_delegate(unsigned long phys)
 static inline int rmi_granule_delegate_dev(unsigned long phys)
 {
 	struct arm_smccc_res res;
-
 	arm_smccc_1_1_invoke(SMC_RMI_GRANULE_DELEGATE_DEV, phys, &res);
 
 	return res.a0;

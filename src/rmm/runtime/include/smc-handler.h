@@ -30,6 +30,8 @@ unsigned long smc_granule_delegate(unsigned long addr);
 
 unsigned long smc_granule_undelegate(unsigned long addr);
 
+unsigned long smc_granule_delegate_dev_1(unsigned long addr);
+
 unsigned long smc_realm_activate(unsigned long rd_addr);
 
 unsigned long smc_realm_create(unsigned long rd_addr,
